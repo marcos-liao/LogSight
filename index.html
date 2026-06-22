@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogSight — log threat hunting (learn &amp; real-world)</title>
+  <link rel="stylesheet" href="css/style.css?v=16">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="logo" aria-label="LogSight">
+          <picture>
+            <source srcset="img/logo-transparent.png" media="(prefers-color-scheme: dark)">
+            <img class="logo-image" src="img/logo-transparent-light.png" alt="" aria-hidden="true">
+          </picture>
+          <span class="sr-only">LogSight</span>
+        </span>
+        <span class="badge">log threat hunting · learn &amp; real-world</span>
+      </div>
+      <nav class="topbar-nav">
+        <a href="#" class="nav-link active" data-tab="learn">Learn</a>
+        <a href="#" class="nav-link" data-tab="analyze">Analyze</a>
+        <a href="#" class="nav-link" data-tab="guide">Guide</a>
+        <a href="#" class="nav-link" data-tab="settings">Settings</a>
+      </nav>
+    </header>
+
+    <main class="content">
+
+      <!-- ==================== LEARN MODE ==================== -->
+      <div id="tab-learn" class="tab-content active">
+
+        <!-- Scenario selector -->
+        <div class="scenario-bar">
+          <div class="input-group">
+            <label for="scenario-select">Scenario</label>
+            <select id="scenario-select">
+              <option value="" disabled selected>Choose a scenario...</option>
+              <option value="ssh-bruteforce">SSH Brute Force → Privilege Escalation</option>
+              <option value="web-shell">Web Shell Upload & Execution</option>
+              <option value="dns-exfil">DNS Exfiltration</option>
+              <option value="sqli">SQL Injection → Data Dump</option>
+              <option value="lateral-rdp">Lateral Movement via RDP</option>
+              <option value="ransomware">Ransomware Indicator</option>
+              <option value="phishing-malware">Phishing → Malware Download</option>
+              <option value="cred-dump">Credential Dumping</option>
+              <option value="crypto-mining">Crypto Mining Detection</option>
+            </select>
+          </div>
+          <div class="difficulty-display">
+            <span class="diff-label">Difficulty</span>
+            <span class="diff-stars" id="diff-stars">—</span>
+          </div>
+          <button id="btn-load-scenario" class="btn-primary">Load Scenario</button>
+        </div>
+
+        <!-- Scenario description -->
+        <div id="scenario-intro" class="scenario-intro" style="display:none;">
+          <div class="intro-header">
+            <h3 id="scenario-title" class="intro-title"></h3>
+            <div class="intro-tags">
+              <span class="tag tag-logsource" id="scenario-logsource"></span>
+              <span class="tag tag-mitre" id="scenario-mitre-tag"></span>
+            </div>
+          </div>
+          <p id="scenario-desc" class="intro-desc"></p>
+        </div>
+
+        <!-- Timeline chart -->
+        <div id="learn-timeline-box" class="section-box" style="display:none;">
+          <div class="section-header">
+            <h3 class="section-title">Event Timeline</h3>
+            <div class="timeline-controls">
+              <button class="btn-icon" id="btn-learn-zoom-reset" title="Reset zoom">Reset</button>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="learn-timeline-chart"></canvas>
+          </div>
+          <div class="timeline-range" id="learn-timeline-range">
+            Showing: <span id="learn-range-start">—</span> to <span id="learn-range-end">—</span>
+          </div>
+        </div>
+
+        <!-- Log viewer -->
+        <div id="learn-log-box" class="section-box" style="display:none;">
+          <div class="section-header">
+            <h3 class="section-title">Log Viewer</h3>
+            <div class="log-stats">
+              <span id="learn-log-count">0 lines</span>
+              <span id="learn-log-filtered" class="stat-filtered"></span>
+            </div>
+          </div>
+          <div class="log-filter-bar">
+            <input type="text" id="learn-log-filter" placeholder="Filter logs (regex supported)..." spellcheck="false">
+            <div class="filter-actions">
+              <button class="btn-icon" id="btn-learn-wrap" title="Toggle line wrap">Wrap</button>
+              <button class="btn-icon" id="btn-learn-filter-clear" title="Clear filter">Clear</button>
+            </div>
+          </div>
+          <div class="log-context" id="learn-log-context" style="display:none;">
+            <button class="log-context-back" id="learn-context-back">&#8592; Show all</button>
+            <span class="log-context-label" id="learn-context-label"></span>
+          </div>
+          <div class="log-viewer" id="learn-log-viewer">
+            <div class="log-viewport" id="learn-log-viewport">
+              <!-- Virtual scroll renders here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Investigation questions -->
+        <div id="learn-questions-box" class="section-box" style="display:none;">
+          <h3 class="section-title">Investigation</h3>
+          <div id="learn-questions" class="questions-list">
+            <!-- Questions render here -->
+          </div>
+          <button id="btn-submit-answers" class="btn-primary" style="margin-top:12px;">Submit Answers</button>
+          <button id="btn-ai-hint" class="btn-secondary" style="margin-top:12px;margin-left:8px;display:none;">Ask AI for a hint</button>
+          <div class="ai-result" id="learn-ai-result" style="display:none;margin-top:12px;"></div>
+        </div>
+
+        <!-- Intelligence Report (locked until answered) -->
+        <div id="learn-intel-box" class="section-box intel-locked" style="display:none;">
+          <div class="intel-lock-overlay" id="intel-lock-overlay">
+            <span class="lock-icon">&#128274;</span>
+            <span class="lock-text">Complete the investigation to unlock the Intelligence Report</span>
+          </div>
+          <div class="intel-content" id="intel-content" style="display:none;">
+            <h3 class="section-title">Intelligence Report</h3>
+            <p class="intel-connect-note">These five tabs are connected views of the <strong>same incident</strong> — read together they form the full picture: what to look for (IoC), what's at stake (Risk), how it unfolded (Attack Steps), how to stop it (Mitigation), and how it maps to standards (Frameworks). MITRE IDs in Attack Steps link to the Frameworks tab.</p>
+            <div class="intel-tabs">
+              <button class="intel-tab active" data-itab="ioc">IoC</button>
+              <button class="intel-tab" data-itab="risk">Risk</button>
+              <button class="intel-tab" data-itab="attack">Attack Steps</button>
+              <button class="intel-tab" data-itab="mitigation">Mitigation</button>
+              <button class="intel-tab" data-itab="frameworks">Frameworks</button>
+            </div>
+            <div class="intel-panel active" id="itab-ioc">
+              <ul id="intel-ioc-list" class="intel-list"></ul>
+            </div>
+            <div class="intel-panel" id="itab-risk">
+              <ul id="intel-risk-list" class="intel-list"></ul>
+            </div>
+            <div class="intel-panel" id="itab-attack">
+              <div id="intel-attack-chain" class="attack-chain"></div>
+            </div>
+            <div class="intel-panel" id="itab-mitigation">
+              <ul id="intel-mitigation-list" class="intel-list"></ul>
+            </div>
+            <div class="intel-panel" id="itab-frameworks">
+              <div class="framework-grid">
+                <div class="framework-card">
+                  <h4 class="fw-title">MITRE ATT&CK</h4>
+                  <div id="fw-mitre" class="fw-content"></div>
+                </div>
+                <div class="framework-card">
+                  <h4 class="fw-title">NIST CSF</h4>
+                  <div id="fw-nist" class="fw-content"></div>
+                </div>
+                <div class="framework-card">
+                  <h4 class="fw-title">OWASP</h4>
+                  <div id="fw-owasp" class="fw-content"></div>
+                </div>
+                <div class="framework-card">
+                  <h4 class="fw-title">CVSS</h4>
+                  <div id="fw-cvss" class="fw-content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== ANALYZE MODE ==================== -->
+      <div id="tab-analyze" class="tab-content">
+
+        <!-- File loader -->
+        <div id="analyze-loader" class="file-loader">
+          <div class="loader-dropzone" id="dropzone">
+            <div class="dropzone-content">
+              <span class="dropzone-icon">&#128193;</span>
+              <p class="dropzone-title">Drop log files here</p>
+              <p class="dropzone-hint">or use the buttons below</p>
+            </div>
+          </div>
+          <div class="loader-actions">
+            <button class="btn-primary" id="btn-pick-folder">
+              <span class="btn-icon-inline">&#128194;</span> Pick Folder
+            </button>
+            <button class="btn-secondary" id="btn-pick-files">
+              <span class="btn-icon-inline">&#128196;</span> Pick Files
+            </button>
+            <input type="file" id="file-input-folder" webkitdirectory multiple style="display:none;">
+            <input type="file" id="file-input-files" multiple style="display:none;">
+          </div>
+          <div class="loader-info">
+            <span class="info-text">Accepts: .log files and extensionless text files</span>
+            <span class="info-text">Limit: 500 MB total</span>
+          </div>
+
+          <!-- Collapsible info panels -->
+          <div class="collapsible-section">
+            <button class="collapsible-toggle" id="toggle-combine">
+              Why Combine Multiple Logs? <span class="ref-arrow">&#9662;</span>
+            </button>
+            <div class="collapsible-body" id="body-combine" style="display:none;">
+              <p class="guide-text">A single log file only tells part of the story. Loading multiple log sources lets you correlate events across systems and see the full attack chain — from initial access to impact.</p>
+              <div class="guide-example">
+                <div class="guide-example-title">Example: SQL Injection → Data Exfiltration</div>
+                <div class="guide-flow">
+                  <div class="flow-step">
+                    <span class="flow-file">access.log</span>
+                    <span class="flow-event">SQLi attempt from attacker IP</span>
+                  </div>
+                  <div class="flow-connector">&#8595;</div>
+                  <div class="flow-step">
+                    <span class="flow-file">app.log</span>
+                    <span class="flow-event">Database error: syntax error near UNION</span>
+                  </div>
+                  <div class="flow-connector">&#8595;</div>
+                  <div class="flow-step">
+                    <span class="flow-file">db.log</span>
+                    <span class="flow-event">Abnormal query: SELECT * FROM users WHERE 1=1 UNION...</span>
+                  </div>
+                  <div class="flow-connector">&#8595;</div>
+                  <div class="flow-step">
+                    <span class="flow-file">auth.log</span>
+                    <span class="flow-event">Login as "admin" from same IP</span>
+                  </div>
+                  <div class="flow-connector">&#8595;</div>
+                  <div class="flow-step">
+                    <span class="flow-file">syslog</span>
+                    <span class="flow-event">New cron job created — persistence established</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="collapsible-section">
+            <button class="collapsible-toggle" id="toggle-combos">
+              Recommended Combinations <span class="ref-arrow">&#9662;</span>
+            </button>
+            <div class="collapsible-body" id="body-combos" style="display:none;">
+              <div class="guide-combos">
+                <div class="combo-item">
+                  <span class="combo-usecase">Web Attack</span>
+                  <span class="combo-files">access.log + error.log + app.log + waf.log</span>
+                </div>
+                <div class="combo-item">
+                  <span class="combo-usecase">Auth Attack</span>
+                  <span class="combo-files">auth.log + syslog + audit.log</span>
+                </div>
+                <div class="combo-item">
+                  <span class="combo-usecase">Data Exfiltration</span>
+                  <span class="combo-files">dns.log + proxy.log + firewall.log</span>
+                </div>
+                <div class="combo-item">
+                  <span class="combo-usecase">Malware / Backdoor</span>
+                  <span class="combo-files">syslog + kern.log + cron.log + auth.log</span>
+                </div>
+                <div class="combo-item">
+                  <span class="combo-usecase">Full Incident</span>
+                  <span class="combo-files">auth.log + access.log + syslog + firewall.log + app.log</span>
+                </div>
+              </div>
+              <p class="guide-merge-note">All loaded files are merged and sorted by timestamp, so you can trace events across sources on a single timeline.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pre-load summary (shown after file select, before load) -->
+        <div id="file-selection" class="file-selection" style="display:none;">
+          <div class="preload-header">
+            <h3 class="section-title">Ready to Load</h3>
+            <div class="preload-stats">
+              <span id="selected-count">0 files</span>
+              <span class="preload-dot">&#183;</span>
+              <span id="selected-size">0 MB</span> / 500 MB
+            </div>
+          </div>
+          <div class="preload-bar-track">
+            <div class="preload-bar-fill" id="preload-bar"></div>
+          </div>
+          <div id="file-list" class="file-list">
+            <!-- File checkboxes + size bars render here -->
+          </div>
+          <div id="preload-warning" class="preload-warning" style="display:none;"></div>
+          <div class="selection-actions">
+            <button class="btn-secondary" id="btn-select-all">Select All</button>
+            <button class="btn-secondary" id="btn-select-none">Select None</button>
+            <button class="btn-primary" id="btn-load-selected">Load Selected</button>
+          </div>
+        </div>
+
+        <!-- Loading progress -->
+        <div id="load-progress" class="load-progress" style="display:none;">
+          <div class="progress-header">
+            <span id="progress-file">Loading...</span>
+            <span id="progress-pct">0%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- Post-load summary (shown after files parsed) -->
+        <div id="postload-summary" class="postload-summary" style="display:none;">
+          <div class="postload-header">
+            <h3 class="postload-title">Load Complete</h3>
+            <span class="postload-coverage" id="postload-coverage"></span>
+          </div>
+          <table class="postload-table">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Lines</th>
+                <th>Date Range</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody id="postload-files">
+              <!-- Populated after parsing -->
+            </tbody>
+            <tfoot>
+              <tr class="postload-total">
+                <td>Total</td>
+                <td id="postload-total-lines">—</td>
+                <td id="postload-total-range">—</td>
+                <td id="postload-total-size">—</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div id="postload-warnings" class="postload-warnings"></div>
+          <div class="postload-actions">
+            <button class="btn-primary" id="btn-start-analysis">Start Analysis</button>
+            <button class="btn-secondary" id="btn-reload-files">Change Files</button>
+          </div>
+        </div>
+
+        <!-- Analyze workspace (shown after Start Analysis) -->
+        <div id="analyze-workspace" style="display:none;">
+
+          <!-- Compact loaded-files bar -->
+          <div class="loaded-bar" id="loaded-bar">
+            <span class="loaded-check">&#10003;</span>
+            <span class="loaded-summary" id="loaded-summary">—</span>
+            <button class="btn-secondary" id="btn-load-different">Load different files</button>
+          </div>
+
+          <!-- Detection summary -->
+          <div class="detection-summary" id="detection-summary">
+            <div class="summary-header">
+              <h3 class="section-title">Detection Results</h3>
+              <div class="detection-tags">
+                <span class="dtag dtag-rule">RULE</span>
+                <span class="dtag dtag-behavior">STAT</span>
+                <span class="dtag dtag-ml">AI</span>
+              </div>
+            </div>
+            <div class="alert-list" id="alert-list">
+              <!-- Alerts render here -->
+              <div class="alert-item alert-critical">
+                <span class="alert-severity">CRIT</span>
+                <span class="alert-title">Web shell detected</span>
+                <span class="alert-source">access.log:1847</span>
+                <span class="alert-tag dtag dtag-rule">RULE</span>
+              </div>
+              <div class="alert-item alert-high">
+                <span class="alert-severity">HIGH</span>
+                <span class="alert-title">SSH Brute Force (347 attempts)</span>
+                <span class="alert-source">auth.log:1204</span>
+                <span class="alert-tag dtag dtag-behavior">STAT</span>
+              </div>
+              <div class="alert-item alert-high">
+                <span class="alert-severity">HIGH</span>
+                <span class="alert-title">Successful login after brute force burst</span>
+                <span class="alert-source">auth.log:1551</span>
+                <span class="alert-tag dtag dtag-rule">RULE</span>
+              </div>
+              <div class="alert-item alert-medium">
+                <span class="alert-severity">MED</span>
+                <span class="alert-title">Unusual cron modification</span>
+                <span class="alert-source">syslog:4201</span>
+                <span class="alert-tag dtag dtag-ml">AI</span>
+              </div>
+              <div class="alert-item alert-low">
+                <span class="alert-severity">LOW</span>
+                <span class="alert-title">404 burst from single IP</span>
+                <span class="alert-source">access.log:892</span>
+                <span class="alert-tag dtag dtag-behavior">STAT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Analyst (Layer 3) — shown only when an AI provider is connected -->
+          <div class="ai-analyst section-box" id="ai-analyst" style="display:none;">
+            <div class="section-header">
+              <h3 class="section-title">AI Analyst <span class="ai-on-badge">Layer 3 active</span></h3>
+            </div>
+            <div class="ai-actions-row">
+              <button class="btn-secondary" id="btn-ai-summarize">Summarize findings</button>
+              <button class="btn-secondary" id="btn-ai-report">Generate incident report</button>
+            </div>
+            <div class="ai-query-bar">
+              <input type="text" id="ai-query-input" placeholder="Ask about these logs… e.g. what did the attacker do after gaining access?" spellcheck="false">
+              <button class="btn-primary" id="btn-ai-ask">Ask</button>
+            </div>
+            <div class="ai-result" id="ai-result" style="display:none;"></div>
+          </div>
+
+          <!-- Timeline chart -->
+          <div class="section-box">
+            <div class="section-header">
+              <h3 class="section-title">Event Timeline</h3>
+              <div class="timeline-controls">
+                <button class="btn-icon" id="btn-analyze-zoom-reset" title="Reset zoom">Reset</button>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="analyze-timeline-chart"></canvas>
+            </div>
+            <div class="timeline-range" id="analyze-timeline-range">
+              Showing: <span id="analyze-range-start">—</span> to <span id="analyze-range-end">—</span>
+            </div>
+          </div>
+
+          <!-- Log viewer with file tabs -->
+          <div class="section-box">
+            <div class="section-header">
+              <h3 class="section-title">Log Viewer</h3>
+              <div class="log-stats">
+                <span id="analyze-log-count">0 lines</span>
+                <span id="analyze-log-filtered" class="stat-filtered"></span>
+              </div>
+            </div>
+            <div class="log-file-tabs" id="log-file-tabs">
+              <button class="file-tab active" data-file="all">All (merged)</button>
+              <button class="file-tab" data-file="auth.log">auth.log</button>
+              <button class="file-tab" data-file="syslog">syslog</button>
+              <!-- Dynamic tabs added here -->
+            </div>
+            <div class="log-filter-bar">
+              <input type="text" id="analyze-log-filter" placeholder="Filter logs (regex supported)..." spellcheck="false">
+              <div class="filter-actions">
+                <button class="btn-icon" id="btn-analyze-wrap" title="Toggle line wrap">Wrap</button>
+                <button class="btn-icon" id="btn-analyze-filter-clear" title="Clear filter">Clear</button>
+              </div>
+            </div>
+            <div class="log-context" id="analyze-log-context" style="display:none;">
+              <button class="log-context-back" id="analyze-context-back">&#8592; Show all</button>
+              <span class="log-context-label" id="analyze-context-label"></span>
+            </div>
+            <div class="log-viewer" id="analyze-log-viewer">
+              <div class="log-viewport" id="analyze-log-viewport">
+                <!-- Virtual scroll renders here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Syslog reference -->
+          <div class="ref-bar">
+            <button class="ref-toggle" id="syslog-ref-toggle">Syslog Reference <span class="ref-arrow">&#9662;</span></button>
+            <div class="ref-content" id="syslog-ref-content" style="display:none;">
+              <div class="ref-columns">
+                <div class="ref-col">
+                  <h4>Auth & Access</h4>
+                  <table class="ref-table">
+                    <tr><td>auth.log</td><td>SSH, sudo, login attempts</td></tr>
+                    <tr><td>secure</td><td>Auth events (RHEL/CentOS)</td></tr>
+                    <tr><td>faillog</td><td>Failed login records</td></tr>
+                    <tr><td>audit.log</td><td>SELinux / audit events</td></tr>
+                  </table>
+                  <h4>Web Server</h4>
+                  <table class="ref-table">
+                    <tr><td>access.log</td><td>HTTP requests</td></tr>
+                    <tr><td>error.log</td><td>Server errors</td></tr>
+                  </table>
+                </div>
+                <div class="ref-col">
+                  <h4>System</h4>
+                  <table class="ref-table">
+                    <tr><td>syslog</td><td>General system events</td></tr>
+                    <tr><td>kern.log</td><td>Kernel messages</td></tr>
+                    <tr><td>cron.log</td><td>Scheduled task logs</td></tr>
+                    <tr><td>messages</td><td>General (RHEL/CentOS)</td></tr>
+                  </table>
+                  <h4>Network</h4>
+                  <table class="ref-table">
+                    <tr><td>firewall.log</td><td>iptables / nftables</td></tr>
+                    <tr><td>named.log</td><td>DNS queries (BIND)</td></tr>
+                    <tr><td>dnsmasq.log</td><td>DNS queries (dnsmasq)</td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /analyze-workspace -->
+      </div>
+
+      <!-- ==================== GUIDE ==================== -->
+      <div id="tab-guide" class="tab-content">
+
+        <div class="guide-manual">
+          <div class="manual-group">
+            <h4 class="manual-subtitle">Regex Filter</h4>
+            <p class="manual-intro">Use the filter bar in the Log Viewer to search and highlight log entries. Supports full regex syntax.</p>
+            <table class="manual-table">
+              <tr><td class="manual-cmd">Failed password</td><td>Exact text match</td></tr>
+              <tr><td class="manual-cmd">Failed|Accepted</td><td>Match either word</td></tr>
+              <tr><td class="manual-cmd">sshd\[\d+\]</td><td>Match sshd with any PID</td></tr>
+              <tr><td class="manual-cmd">45\.33\.32\.\d+</td><td>Match IP range 45.33.32.*</td></tr>
+              <tr><td class="manual-cmd">03:1[4-8]:\d{2}</td><td>Match time range 03:14 – 03:18</td></tr>
+              <tr><td class="manual-cmd">(?i)error|warn|crit</td><td>Case-insensitive severity match</td></tr>
+            </table>
+          </div>
+
+          <div class="manual-group">
+            <h4 class="manual-subtitle">Timeline Chart</h4>
+            <p class="manual-intro">Interactive timeline showing event frequency over time. Zoom to filter.</p>
+            <table class="manual-table">
+              <tr><td class="manual-key">Scroll wheel</td><td>Zoom in/out on timeline</td></tr>
+              <tr><td class="manual-key">Click + drag</td><td>Pan left/right</td></tr>
+              <tr><td class="manual-key">Drag select range</td><td>Zoom into selected time window</td></tr>
+              <tr><td class="manual-key">Click spike</td><td>Jump to that log line</td></tr>
+              <tr><td class="manual-key">Reset button</td><td>Restore full timeline view</td></tr>
+            </table>
+            <p class="manual-note">Zooming the chart automatically filters the log viewer to show only events within that time range.</p>
+          </div>
+
+          <div class="manual-group">
+            <h4 class="manual-subtitle">Detection Engine</h4>
+            <p class="manual-intro">Three detection layers run on your loaded logs. Each layer adds depth to the analysis.</p>
+            <table class="manual-table">
+              <tr><td class="manual-key">Layer 1 (Rules)</td><td>Signature/regex matches — appear instantly on load, tagged RULE</td></tr>
+              <tr><td class="manual-key">Layer 2 (Statistical)</td><td>Baselines, frequency spikes, off-hours, event chains — appear on load, tagged STAT</td></tr>
+              <tr><td class="manual-key">Layer 3 (AI)</td><td>Optional LLM — natural-language queries, summaries, incident reports, and behavioral analysis. On-demand, tagged AI</td></tr>
+            </table>
+            <p class="manual-note">Click any alert in the Detection Results panel to jump to the relevant log lines and see the enrichment details (IoC, MITRE ATT&CK, mitigation).</p>
+          </div>
+
+          <div class="manual-group">
+            <h4 class="manual-subtitle">Learn Mode</h4>
+            <p class="manual-intro">Guided scenarios with pre-built log data for hands-on practice.</p>
+            <table class="manual-table">
+              <tr><td class="manual-key">1. Pick scenario</td><td>Choose a scenario from the dropdown and click Load</td></tr>
+              <tr><td class="manual-key">2. Investigate</td><td>Read the logs, use filter and timeline to find the anomalies</td></tr>
+              <tr><td class="manual-key">3. Answer</td><td>Fill in the investigation questions and submit</td></tr>
+              <tr><td class="manual-key">4. Learn</td><td>Unlock the Intelligence Report — IoC, attack steps, MITRE mapping, mitigation</td></tr>
+            </table>
+          </div>
+
+          <div class="manual-group">
+            <h4 class="manual-subtitle">Analyze Mode</h4>
+            <p class="manual-intro">Load your own log files for real-world investigation.</p>
+            <table class="manual-table">
+              <tr><td class="manual-key">1. Load files</td><td>Drop files, pick a folder, or select individual .log files</td></tr>
+              <tr><td class="manual-key">2. Review</td><td>Check the post-load summary — date range, line counts, coverage gaps</td></tr>
+              <tr><td class="manual-key">3. Analyze</td><td>Detection engine runs automatically — review alerts by severity</td></tr>
+              <tr><td class="manual-key">4. Investigate</td><td>Use timeline zoom + regex filter to drill into specific events</td></tr>
+              <tr><td class="manual-key">5. Report</td><td>Export findings as an incident report</td></tr>
+            </table>
+          </div>
+
+          <div class="manual-group">
+            <h4 class="manual-subtitle">Keyboard Shortcuts</h4>
+            <table class="manual-table">
+              <tr><td class="manual-key">Ctrl + F</td><td>Focus the log filter bar</td></tr>
+              <tr><td class="manual-key">Escape</td><td>Clear filter / close panels</td></tr>
+              <tr><td class="manual-key">1 / 2 / 3 / 4</td><td>Switch tabs: Learn / Analyze / Guide / Settings</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SETTINGS ==================== -->
+      <div id="tab-settings" class="tab-content">
+
+        <div class="settings-section">
+          <h3 class="section-title">Detection Engine</h3>
+          <p class="section-desc">Out of the box — these 3 layers run fully offline without any configuration. No API key, no internet, no setup.</p>
+          <div class="engine-layers">
+            <div class="engine-layer">
+              <span class="layer-badge layer-on">ON</span>
+              <div class="layer-info">
+                <span class="layer-name">Layer 1 — Rule-based</span>
+                <span class="layer-desc">Regex pattern matching against known attack signatures: SQLi, XSS, path traversal, brute force patterns, web shells, and more. Instant results.</span>
+                <div class="layer-examples">
+                  <span class="layer-ex">Brute force SSH</span>
+                  <span class="layer-ex">SQLi in URL</span>
+                  <span class="layer-ex">Web shell access</span>
+                  <span class="layer-ex">Path traversal</span>
+                </div>
+              </div>
+            </div>
+            <div class="engine-layer">
+              <span class="layer-badge layer-on">ON</span>
+              <div class="layer-info">
+                <span class="layer-name">Layer 2 — Statistical</span>
+                <span class="layer-desc">Builds a baseline from your logs, then flags deviations: frequency spikes, unusual hours, abnormal volumes, and event chains within time windows.</span>
+                <div class="layer-examples">
+                  <span class="layer-ex">Frequency spike</span>
+                  <span class="layer-ex">Off-hours activity</span>
+                  <span class="layer-ex">Volume anomaly</span>
+                  <span class="layer-ex">Event chain</span>
+                </div>
+              </div>
+            </div>
+            <div class="engine-layer">
+              <span class="layer-badge layer-off" id="layer4-badge">OFF</span>
+              <div class="layer-info">
+                <span class="layer-name">Layer 3 — AI</span>
+                <span class="layer-desc">Optional LLM layer — off until you connect a provider below. Activating AI adds: natural-language queries over your logs, auto-summarization of findings, incident report generation, contextual investigation hints, and behavioral analysis (e.g. beaconing / C2 patterns and sequence anomalies that the rule and statistical layers don't cover). All data is pseudonymized before sending and the API key stays in your browser.</span>
+                <div class="layer-examples">
+                  <span class="layer-ex">NL query</span>
+                  <span class="layer-ex">Auto summary</span>
+                  <span class="layer-ex">Incident report</span>
+                  <span class="layer-ex">Hints</span>
+                  <span class="layer-ex">Behavioral analysis</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3 class="section-title">AI Enhancement</h3>
+          <p class="section-desc">Optional — connect an AI provider to unlock Layer 3 (AI). Enables natural language queries, auto-summarization, incident report generation, and behavioral analysis. All data is pseudonymized before sending.</p>
+
+          <div class="settings-form">
+            <div class="input-group">
+              <label for="ai-provider">Provider</label>
+              <select id="ai-provider">
+                <option value="none">None (offline only)</option>
+                <option value="claude">Claude (Anthropic)</option>
+                <option value="openai">OpenAI</option>
+              </select>
+            </div>
+            <div id="ai-key-group" class="input-group" style="display:none;">
+              <label for="ai-key">API Key</label>
+              <input type="password" id="ai-key" placeholder="sk-ant-..." spellcheck="false">
+            </div>
+            <div id="ai-model-group" class="input-group" style="display:none;">
+              <label for="ai-model">Model</label>
+              <select id="ai-model">
+                <option value="claude-sonnet-4-6">claude-sonnet-4-6</option>
+                <option value="claude-haiku-4-5">claude-haiku-4-5</option>
+              </select>
+            </div>
+            <div id="ai-actions" style="display:none;">
+              <button class="btn-secondary" id="btn-test-ai">Test Connection</button>
+              <button class="btn-primary" id="btn-save-ai">Save</button>
+              <span id="ai-status" class="ai-status"></span>
+            </div>
+          </div>
+
+          <div class="privacy-notice" id="privacy-notice" style="display:none;">
+            <div class="notice-icon">&#9432;</div>
+            <div class="notice-body">
+              <p class="notice-title">Pseudonymization Active</p>
+              <p class="notice-text">All identifiable data (IP addresses, hostnames, usernames, emails, paths) is automatically replaced with consistent dummy values before being sent to the AI provider. Real data never leaves your browser.</p>
+              <button class="btn-secondary" id="btn-view-mapping" style="margin-top:8px;">View Mapping Table</button>
+            </div>
+          </div>
+
+          <div class="settings-toggle" id="ai-localonly-toggle" style="display:none;">
+            <label class="toggle-label">
+              <input type="checkbox" id="ai-localonly">
+              <span class="toggle-switch"></span>
+              <span class="toggle-text">Local-only mode</span>
+            </label>
+            <p class="toggle-desc">AI receives only summary statistics, not log content (even pseudonymized).</p>
+          </div>
+
+          <h3 class="section-title" style="margin-top:16px;">AI Features</h3>
+          <p class="section-desc" style="margin-bottom:10px;">Connect a provider above to unlock these. Summarize / Report / Ask appear in the Analyst panel in Analyze mode; Adaptive Hints appear in Learn mode.</p>
+          <div class="feature-grid" id="ai-features">
+            <div class="feature-card locked">
+              <span class="feature-icon">&#128172;</span>
+              <span class="feature-name">Natural Language Query</span>
+              <span class="feature-lock">&#128274;</span>
+            </div>
+            <div class="feature-card locked">
+              <span class="feature-icon">&#128203;</span>
+              <span class="feature-name">Auto Summarize</span>
+              <span class="feature-lock">&#128274;</span>
+            </div>
+            <div class="feature-card locked">
+              <span class="feature-icon">&#128221;</span>
+              <span class="feature-name">Incident Report</span>
+              <span class="feature-lock">&#128274;</span>
+            </div>
+            <div class="feature-card locked">
+              <span class="feature-icon">&#128161;</span>
+              <span class="feature-name">Adaptive Hints</span>
+              <span class="feature-lock">&#128274;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3 class="section-title">Performance</h3>
+          <div class="setting-item">
+            <div class="setting-item-header">
+              <label for="max-upload">Max upload limit</label>
+              <span class="setting-value" id="max-upload-value">500 MB</span>
+            </div>
+            <p class="setting-default">Default: 500 MB — covers 5-25 days of logs on small-medium servers with multiple sources. Above 500 MB recommended only for busy servers or large-scale incident investigation. For datasets exceeding 1 GB, consider using a dedicated SIEM (Splunk, ELK, Wazuh).</p>
+            <input type="range" id="max-upload" min="100" max="1000" step="50" value="500" class="setting-range">
+            <div class="setting-range-labels">
+              <span>100 MB</span>
+              <span>1 GB</span>
+            </div>
+            <div class="perf-impact" id="perf-impact">
+              <div class="perf-meters">
+                <div class="perf-meter">
+                  <div class="perf-meter-header">
+                    <span class="perf-meter-label">CPU</span>
+                    <span class="perf-meter-value" id="perf-cpu-value">35%</span>
+                  </div>
+                  <div class="perf-bar-track"><div class="perf-bar-fill perf-cpu" id="perf-cpu-bar" style="width:35%"></div></div>
+                </div>
+                <div class="perf-meter">
+                  <div class="perf-meter-header">
+                    <span class="perf-meter-label">Memory</span>
+                    <span class="perf-meter-value" id="perf-mem-value">~480 MB</span>
+                  </div>
+                  <div class="perf-bar-track"><div class="perf-bar-fill perf-mem" id="perf-mem-bar" style="width:24%"></div></div>
+                </div>
+                <div class="perf-meter">
+                  <div class="perf-meter-header">
+                    <span class="perf-meter-label">Performance</span>
+                    <span class="perf-meter-value" id="perf-speed-value">Smooth</span>
+                  </div>
+                  <div class="perf-bar-track"><div class="perf-bar-fill perf-speed" id="perf-speed-bar" style="width:35%"></div></div>
+                </div>
+              </div>
+              <div class="perf-estimates" id="perf-estimates">
+                <div class="perf-est-row">
+                  <span class="perf-est-label">Initial parse</span>
+                  <span class="perf-est-value" id="perf-parse">~3-5s</span>
+                </div>
+                <div class="perf-est-row">
+                  <span class="perf-est-label">Regex filter</span>
+                  <span class="perf-est-value" id="perf-filter">~0.5s</span>
+                </div>
+                <div class="perf-est-row">
+                  <span class="perf-est-label">Chart zoom</span>
+                  <span class="perf-est-value" id="perf-chart">instant</span>
+                </div>
+                <div class="perf-est-row">
+                  <span class="perf-est-label">Detection scan</span>
+                  <span class="perf-est-value" id="perf-ml">~5-8s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="bottombar">
+      <div class="footer-left">
+        <span class="footer-text">LogSight v1.0</span>
+        <span class="footer-desc">A tool for learning log-based threat hunting — and for real-world log threat hunting.</span>
+      </div>
+      <div class="footer-right">
+        <button id="btn-export-report" class="btn-icon" title="Export report">&#128196; Report</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Vendored libraries (local, no CDN) -->
+  <script src="lib/chart.min.js"></script>
+  <script src="lib/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <script src="lib/hammer.min.js"></script>
+  <script src="lib/chartjs-plugin-zoom.min.js"></script>
+
+  <!-- Data -->
+  <script src="js/frameworks.js?v=7"></script>
+  <script src="js/scenarios.js?v=9"></script>
+  <script src="js/enrichment.js?v=11"></script>
+
+  <!-- Core modules -->
+  <script src="js/log-parser.js?v=8"></script>
+  <script src="js/pseudonymizer.js?v=7"></script>
+  <script src="js/detection.js?v=11"></script>
+  <script src="js/ai.js?v=14"></script>
+  <script src="js/timeline.js?v=7"></script>
+  <script src="js/log-viewer.js?v=7"></script>
+
+  <!-- App orchestration -->
+  <script src="js/app.js?v=14"></script>
+</body>
+</html>

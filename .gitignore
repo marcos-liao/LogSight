@@ -1,0 +1,36 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and workspace metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local agent/Codex workspace metadata
+.agents/
+.claude/
+.codex/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+
+# Dependency/build output if someone experiments locally
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Keep curated sample logs under examples/ tracked.
+# Do not add a blanket *.log rule; examples/*.log are part of the repo.

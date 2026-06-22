@@ -1,0 +1,21 @@
+Jun 14 13:00:01 oracle-db-01 OracleAudit: action=LOGON status=SUCCESS db_user=APP_RO app_user=orders-api client_ip=10.50.4.18 service=ORDERSDB session_id=882120
+Jun 14 13:00:17 oracle-db-01 OracleAudit: action=SELECT status=SUCCESS db_user=APP_RO client_ip=10.50.4.18 object=ORDERS.CUSTOMERS rows=12 elapsed_ms=24 session_id=882120
+Jun 14 13:01:00 oracle-db-01 OracleListener: service=ORDERSDB client_ip=198.51.100.91 program=sqlplus result=ORA-01017 invalid username/password logon denied user=SYSTEM
+Jun 14 13:01:07 oracle-db-01 OracleListener: service=ORDERSDB client_ip=198.51.100.91 program=sqlplus result=ORA-01017 invalid username/password logon denied user=SYS
+Jun 14 13:01:14 oracle-db-01 OracleListener: service=ORDERSDB client_ip=198.51.100.91 program=sqlplus result=ORA-01017 invalid username/password logon denied user=DBSNMP
+Jun 14 13:01:21 oracle-db-01 OracleListener: service=ORDERSDB client_ip=198.51.100.91 program=sqlplus result=ORA-01017 invalid username/password logon denied user=APP_ADMIN
+Jun 14 13:01:28 oracle-db-01 OracleListener: service=ORDERSDB client_ip=198.51.100.91 program=sqlplus result=ORA-01017 invalid username/password logon denied user=REPORTING
+Jun 14 13:01:35 oracle-db-01 OracleListener: service=ORDERSDB client_ip=198.51.100.91 program=sqlplus result=ORA-01017 invalid username/password logon denied user=AUDITOR
+Jun 14 13:02:02 oracle-db-01 OracleAudit: action=LOGON status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 program=sqlplus service=ORDERSDB session_id=882404
+Jun 14 13:02:16 oracle-db-01 OracleAudit: action=SELECT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 sql="select username,password from users where username='' or 1=1 union select username,password from dba_users--" rows=42 session_id=882404
+Jun 14 13:02:31 oracle-db-01 OracleAudit: action=SELECT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 sql="select card_number,cvv from payments where id=7 union select pan,cvv2 from card_archive--" rows=1843 session_id=882404
+Jun 14 13:02:48 oracle-db-01 OracleAudit: action=SELECT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 sql="select email,api_key from customers where status='active' union select username,spare4 from sys.user$--" rows=991 session_id=882404
+Jun 14 13:03:20 oracle-db-01 OracleAudit: action=SELECT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 object=SYS.USER$ columns=NAME,SPARE4 rows=124 session_id=882404 alert="password hash table accessed"
+Jun 14 13:03:51 oracle-db-01 OracleAudit: action=CREATE_DIRECTORY status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 directory=DATA_PUMP_DIR path=/u01/app/oracle/admin/ORDERSDB/dpdump session_id=882404
+Jun 14 13:04:14 oracle-db-01 OracleAudit: action=DATAPUMP_EXPORT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 job=SYS_EXPORT_SCHEMA_01 schema=ORDERS dumpfile=orders_20260614.dmp bytes_sent=18844201 session_id=882404
+Jun 14 13:04:55 oracle-db-01 OracleAudit: action=DATAPUMP_EXPORT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 job=SYS_EXPORT_SCHEMA_01 schema=PAYMENTS dumpfile=payments_20260614.dmp bytes_sent=22400412 session_id=882404
+Jun 14 13:05:32 oracle-db-01 OracleAudit: action=DATAPUMP_EXPORT status=SUCCESS db_user=APP_ADMIN client_ip=198.51.100.91 job=SYS_EXPORT_SCHEMA_01 schema=HR dumpfile=hr_20260614.dmp bytes_sent=17633890 session_id=882404
+Jun 14 13:06:11 oracle-db-01 OracleAudit: action=DROP status=FAILURE db_user=APP_ADMIN client_ip=198.51.100.91 sql="select 1 from dual; drop table audit_log" error=ORA-01031 insufficient privileges session_id=882404
+Jun 14 13:06:38 oracle-db-01 OracleAudit: action=LOGOFF db_user=APP_ADMIN client_ip=198.51.100.91 session_id=882404 duration_sec=276
+Jun 14 13:07:02 oracle-db-01 OracleAudit: action=LOGON status=SUCCESS db_user=APP_RO app_user=orders-api client_ip=10.50.4.18 service=ORDERSDB session_id=882510
+Jun 14 13:07:45 oracle-db-01 OracleAudit: action=SELECT status=SUCCESS db_user=APP_RO client_ip=10.50.4.18 object=ORDERS.ORDERS rows=28 elapsed_ms=31 session_id=882510

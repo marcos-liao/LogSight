@@ -1,0 +1,2 @@
+# LogSight is a static browser app and has no Python package requirements.
+# Open index.html directly, or serve the folder with any local static HTTP server.

@@ -1,0 +1,16 @@
+2026-06-18T01:55:10 win-ws-014 Security-Auditing[4624]: Successful logon. Account=jdoe LogonType=2 (Interactive) Source=127.0.0.1
+2026-06-18T02:10:44 win-ws-014 Security-Auditing[4648]: Logon with explicit credentials. Account=jdoe Target=svc_backup Process=C:\\Windows\\System32\\runas.exe
+2026-06-18T02:12:01 win-ws-014 Security-Auditing[4625]: Failed logon. Account=administrator LogonType=3 (Network) Source=10.0.5.14
+2026-06-18T02:12:03 win-ws-022 Security-Auditing[4625]: Failed logon. Account=administrator LogonType=10 (RemoteInteractive) Source=10.0.5.14
+2026-06-18T02:12:09 win-ws-022 Security-Auditing[4625]: Failed logon. Account=administrator LogonType=10 (RemoteInteractive) Source=10.0.5.14
+2026-06-18T02:12:30 win-ws-022 Security-Auditing[4624]: Successful logon. Account=svc_backup LogonType=10 (RemoteInteractive) Source=10.0.5.14
+2026-06-18T02:14:55 win-ws-022 Security-Auditing[4648]: Logon with explicit credentials. Account=svc_backup Target=administrator Process=mstsc.exe
+2026-06-18T02:16:20 win-fs-003 Security-Auditing[4624]: Successful logon. Account=svc_backup LogonType=10 (RemoteInteractive) Source=10.0.5.22
+2026-06-18T02:18:42 win-fs-003 Security-Auditing[4672]: Special privileges assigned to new logon. Account=svc_backup Privileges=SeDebugPrivilege,SeBackupPrivilege
+2026-06-18T02:21:09 win-fs-003 Security-Auditing[4624]: Successful logon. Account=administrator LogonType=10 (RemoteInteractive) Source=10.0.5.22
+2026-06-18T02:25:33 win-dc-001 Security-Auditing[4624]: Successful logon. Account=administrator LogonType=3 (Network) Source=10.0.5.30
+2026-06-18T02:26:01 win-dc-001 Security-Auditing[4672]: Special privileges assigned to new logon. Account=administrator Privileges=SeDebugPrivilege,SeTcbPrivilege
+2026-06-18T02:28:47 win-dc-001 Security-Auditing[4688]: New process. Account=administrator Process=C:\\Windows\\Temp\\m.exe CommandLine="m.exe lsadump::sam"
+2026-06-18T02:30:12 win-dc-001 Security-Auditing[4624]: Successful logon. Account=krbtgt LogonType=3 (Network) Source=10.0.5.30
+2026-06-18T03:05:00 win-ws-014 Security-Auditing[4634]: Account logoff. Account=jdoe
+2026-06-18T08:30:11 win-ws-031 Security-Auditing[4624]: Successful logon. Account=asmith LogonType=2 (Interactive) Source=127.0.0.1

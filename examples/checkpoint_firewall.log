@@ -1,0 +1,30 @@
+Jun 14 09:00:01 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.5.41 dst=10.10.1.20 s_port=54122 service=https proto=tcp rule="Corp web access" user=apac\mrahman bytes_sent=18423 bytes_received=9184
+Jun 14 09:00:05 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.5.55 dst=10.10.2.15 s_port=53018 service=ldap proto=tcp rule="Domain services" user=apac\jsantoso bytes_sent=11204 bytes_received=23680
+Jun 14 09:00:17 cp-fw-01 CheckPoint: action=Drop blade=Firewall src=203.0.113.11 dst=10.10.1.50 s_port=44111 service=ssh proto=tcp rule="Cleanup rule" reason="Rulebase drop"
+Jun 14 09:01:03 cp-fw-01 CheckPoint: action=Accept blade=URL_Filtering src=10.20.8.21 dst=198.51.100.30 s_port=49810 service=https proto=tcp category=Business rule="Allowed web" bytes_sent=8044 bytes_received=61320
+Jun 14 09:02:00 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.6.12 dst=10.30.1.40 s_port=51233 service=ms-sql proto=tcp rule="App to DB" app=orders-api bytes_sent=24011 bytes_received=88214
+Jun 14 09:03:05 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41001 service=21 proto=tcp protection="SYN scan detected" msg="SYN scan port 21 unreachable"
+Jun 14 09:03:06 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41002 service=22 proto=tcp protection="SYN scan detected" msg="SYN scan port 22 unreachable"
+Jun 14 09:03:07 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41003 service=23 proto=tcp protection="SYN scan detected" msg="SYN scan port 23 unreachable"
+Jun 14 09:03:08 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41004 service=25 proto=tcp protection="SYN scan detected" msg="SYN scan port 25 unreachable"
+Jun 14 09:03:09 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41005 service=53 proto=tcp protection="SYN scan detected" msg="SYN scan port 53 unreachable"
+Jun 14 09:03:10 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41006 service=80 proto=tcp protection="SYN scan detected" msg="SYN scan port 80 unreachable"
+Jun 14 09:03:11 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41007 service=110 proto=tcp protection="SYN scan detected" msg="SYN scan port 110 unreachable"
+Jun 14 09:03:12 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41008 service=135 proto=tcp protection="SYN scan detected" msg="SYN scan port 135 unreachable"
+Jun 14 09:03:13 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41009 service=139 proto=tcp protection="SYN scan detected" msg="SYN scan port 139 unreachable"
+Jun 14 09:03:14 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41010 service=143 proto=tcp protection="SYN scan detected" msg="SYN scan port 143 unreachable"
+Jun 14 09:03:15 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41011 service=389 proto=tcp protection="SYN scan detected" msg="SYN scan port 389 unreachable"
+Jun 14 09:03:16 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41012 service=443 proto=tcp protection="SYN scan detected" msg="SYN scan port 443 unreachable"
+Jun 14 09:03:17 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41013 service=445 proto=tcp protection="SYN scan detected" msg="SYN scan port 445 unreachable"
+Jun 14 09:03:18 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41014 service=1433 proto=tcp protection="SYN scan detected" msg="SYN scan port 1433 unreachable"
+Jun 14 09:03:19 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41015 service=1521 proto=tcp protection="SYN scan detected" msg="SYN scan port 1521 unreachable"
+Jun 14 09:03:20 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41016 service=3306 proto=tcp protection="SYN scan detected" msg="SYN scan port 3306 unreachable"
+Jun 14 09:03:21 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41017 service=3389 proto=tcp protection="SYN scan detected" msg="SYN scan port 3389 unreachable"
+Jun 14 09:03:22 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41018 service=5432 proto=tcp protection="SYN scan detected" msg="SYN scan port 5432 unreachable"
+Jun 14 09:03:23 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41019 service=5900 proto=tcp protection="SYN scan detected" msg="SYN scan port 5900 unreachable"
+Jun 14 09:03:24 cp-fw-01 CheckPoint: action=Drop blade=IPS src=198.51.100.23 dst=10.10.1.10 s_port=41020 service=8080 proto=tcp protection="SYN scan detected" msg="SYN scan port 8080 unreachable"
+Jun 14 09:04:33 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.8.77 dst=192.0.2.80 s_port=52211 service=https proto=tcp rule="Outbound HTTPS" app=backup-client bytes_sent=18455021 bytes_received=84211
+Jun 14 09:05:34 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.8.77 dst=192.0.2.80 s_port=52212 service=https proto=tcp rule="Outbound HTTPS" app=backup-client bytes_sent=21388490 bytes_received=90321
+Jun 14 09:06:35 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.8.77 dst=192.0.2.80 s_port=52213 service=https proto=tcp rule="Outbound HTTPS" app=backup-client bytes_sent=19840112 bytes_received=88122
+Jun 14 09:07:10 cp-fw-01 CheckPoint: action=Drop blade=Anti-Bot src=10.20.9.18 dst=203.0.113.88 s_port=50111 service=https proto=tcp bot="Generic C2" severity=High rule="Block bot traffic"
+Jun 14 09:08:02 cp-fw-01 CheckPoint: action=Accept blade=Firewall src=10.20.5.41 dst=10.10.1.20 s_port=54188 service=https proto=tcp rule="Corp web access" user=apac\mrahman bytes_sent=22013 bytes_received=109102

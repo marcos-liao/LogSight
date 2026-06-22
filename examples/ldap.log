@@ -1,0 +1,48 @@
+Jun 14 12:00:01 ldap-01 slapd[1184]: conn=1100 fd=28 ACCEPT from IP=10.40.8.21:50222 (IP=0.0.0.0:389)
+Jun 14 12:00:01 ldap-01 slapd[1184]: conn=1100 op=0 BIND dn="uid=jsantoso,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:00:01 ldap-01 slapd[1184]: conn=1100 op=0 RESULT tag=97 err=0 text=
+Jun 14 12:00:02 ldap-01 slapd[1184]: conn=1100 op=1 SRCH base="ou=People,dc=corp,dc=local" scope=2 filter="(&(objectClass=person)(uid=jsantoso))" attrs="cn mail memberOf"
+Jun 14 12:00:02 ldap-01 slapd[1184]: conn=1100 op=1 RESULT tag=101 err=0 nentries=1 text=
+Jun 14 12:01:11 ldap-01 slapd[1184]: conn=1110 fd=29 ACCEPT from IP=198.51.100.44:44900 (IP=0.0.0.0:389)
+Jun 14 12:01:11 ldap-01 slapd[1184]: conn=1110 op=0 BIND dn="uid=admin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:11 ldap-01 slapd[1184]: conn=1110 op=0 RESULT tag=97 err=49 text="invalid credentials"
+Jun 14 12:01:17 ldap-01 slapd[1184]: conn=1111 fd=30 ACCEPT from IP=198.51.100.44:44901 (IP=0.0.0.0:389)
+Jun 14 12:01:17 ldap-01 slapd[1184]: conn=1111 op=0 BIND dn="uid=administrator,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:17 ldap-01 slapd[1184]: conn=1111 op=0 RESULT tag=97 err=32 text="no such user administrator"
+Jun 14 12:01:23 ldap-01 slapd[1184]: conn=1112 fd=31 ACCEPT from IP=198.51.100.44:44902 (IP=0.0.0.0:389)
+Jun 14 12:01:23 ldap-01 slapd[1184]: conn=1112 op=0 BIND dn="uid=backupadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:23 ldap-01 slapd[1184]: conn=1112 op=0 RESULT tag=97 err=32 text="no such user backupadmin"
+Jun 14 12:01:29 ldap-01 slapd[1184]: conn=1113 fd=32 ACCEPT from IP=198.51.100.44:44903 (IP=0.0.0.0:389)
+Jun 14 12:01:29 ldap-01 slapd[1184]: conn=1113 op=0 BIND dn="uid=sqladmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:29 ldap-01 slapd[1184]: conn=1113 op=0 RESULT tag=97 err=32 text="no such user sqladmin"
+Jun 14 12:01:35 ldap-01 slapd[1184]: conn=1114 fd=33 ACCEPT from IP=198.51.100.44:44904 (IP=0.0.0.0:389)
+Jun 14 12:01:35 ldap-01 slapd[1184]: conn=1114 op=0 BIND dn="uid=vpnadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:35 ldap-01 slapd[1184]: conn=1114 op=0 RESULT tag=97 err=32 text="no such user vpnadmin"
+Jun 14 12:01:41 ldap-01 slapd[1184]: conn=1115 fd=34 ACCEPT from IP=198.51.100.44:44905 (IP=0.0.0.0:389)
+Jun 14 12:01:41 ldap-01 slapd[1184]: conn=1115 op=0 BIND dn="uid=netadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:41 ldap-01 slapd[1184]: conn=1115 op=0 RESULT tag=97 err=32 text="no such user netadmin"
+Jun 14 12:01:47 ldap-01 slapd[1184]: conn=1116 fd=35 ACCEPT from IP=198.51.100.44:44906 (IP=0.0.0.0:389)
+Jun 14 12:01:47 ldap-01 slapd[1184]: conn=1116 op=0 BIND dn="uid=oracleadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:47 ldap-01 slapd[1184]: conn=1116 op=0 RESULT tag=97 err=32 text="no such user oracleadmin"
+Jun 14 12:01:53 ldap-01 slapd[1184]: conn=1117 fd=36 ACCEPT from IP=198.51.100.44:44907 (IP=0.0.0.0:389)
+Jun 14 12:01:53 ldap-01 slapd[1184]: conn=1117 op=0 BIND dn="uid=helpdeskadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:53 ldap-01 slapd[1184]: conn=1117 op=0 RESULT tag=97 err=32 text="no such user helpdeskadmin"
+Jun 14 12:01:59 ldap-01 slapd[1184]: conn=1118 fd=37 ACCEPT from IP=198.51.100.44:44908 (IP=0.0.0.0:389)
+Jun 14 12:01:59 ldap-01 slapd[1184]: conn=1118 op=0 BIND dn="uid=domainadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:01:59 ldap-01 slapd[1184]: conn=1118 op=0 RESULT tag=97 err=32 text="no such user domainadmin"
+Jun 14 12:02:05 ldap-01 slapd[1184]: conn=1119 fd=38 ACCEPT from IP=198.51.100.44:44909 (IP=0.0.0.0:389)
+Jun 14 12:02:05 ldap-01 slapd[1184]: conn=1119 op=0 BIND dn="uid=svc_admin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:02:05 ldap-01 slapd[1184]: conn=1119 op=0 RESULT tag=97 err=32 text="no such user svc_admin"
+Jun 14 12:02:09 ldap-01 slapd[1184]: conn=1121 fd=42 ACCEPT from IP=198.51.100.44:44910 (IP=0.0.0.0:389)
+Jun 14 12:02:09 ldap-01 slapd[1184]: conn=1121 op=0 BIND dn="uid=ldapadmin,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:02:09 ldap-01 slapd[1184]: conn=1121 op=0 RESULT tag=97 err=32 text="no such user ldapadmin"
+Jun 14 12:02:11 ldap-01 slapd[1184]: conn=1120 fd=39 ACCEPT from IP=10.40.9.91:51000 (IP=0.0.0.0:389)
+Jun 14 12:02:11 ldap-01 slapd[1184]: conn=1120 op=0 BIND dn="uid=svc_hr_sync,ou=ServiceAccounts,dc=corp,dc=local" method=128
+Jun 14 12:02:11 ldap-01 slapd[1184]: conn=1120 op=0 RESULT tag=97 err=0 text=
+Jun 14 12:02:12 ldap-01 slapd[1184]: conn=1120 op=1 SRCH base="dc=corp,dc=local" scope=2 filter="(objectClass=*)" attrs="cn mail telephoneNumber title department memberOf userPassword"
+Jun 14 12:02:13 ldap-01 slapd[1184]: conn=1120 op=1 RESULT tag=101 err=4 nentries=5000 text="Sizelimit exceeded"
+Jun 14 12:02:20 ldap-01 slapd[1184]: conn=1120 op=2 SRCH base="ou=People,dc=corp,dc=local" scope=2 filter="(|(uid=*)(mail=*))" attrs="uid mail memberOf"
+Jun 14 12:02:21 ldap-01 slapd[1184]: conn=1120 op=2 RESULT tag=101 err=0 nentries=1834 text=
+Jun 14 12:03:01 ldap-01 slapd[1184]: conn=1130 fd=41 ACCEPT from IP=10.40.8.33:51240 (IP=0.0.0.0:389)
+Jun 14 12:03:01 ldap-01 slapd[1184]: conn=1130 op=0 BIND dn="uid=dwijaya,ou=People,dc=corp,dc=local" method=128
+Jun 14 12:03:01 ldap-01 slapd[1184]: conn=1130 op=0 RESULT tag=97 err=0 text=
